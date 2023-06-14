@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "AllItems";
+    Layout = "~/Views/_LayoutPage7.cshtml";
+    string[] TableHeader = new string[]
+    {
+        "Id",
+        "Image",
+        "Name",
+        "Description",
+        "Quantity",
+        "Edit",
+        "Delete"
+            };
+}
+
+<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-success">
+    <div class="container-fluid">
+        <img src="~/img/logoo.png" class="logo">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home" aria-current="page" id="redirect" onclick="@("window.location.href='" + Url.Action("GetAllCard", "Card") + "'")">All-Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="productss" aria-current="page" id="redirect" onclick="@("window.location.href='" + Url.Action("AddCard", "Card") + "'")">Add-Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="instres" aria-current="page" id="redirect" onclick="@("window.location.href='" + Url.Action("AllMerOrders", "Card") + "'")">All-Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="instres" aria-current="page" id="redirect" onclick="@("window.location.href='" + Url.Action("AllInstallmets", "Card") + "'")">All-Installmets</a>
+                </li>
+            </ul>
+            <form action="GetAllCard" method="post" class="d-flex">
+                <input class="form-control me-2" type="search" name="SearchString" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            <div class="logout">
+                <a class="btnlogout  active" aria-current="page" id="redirect" onclick="@("window.location.href='" + Url.Action("login", "Account") + "'")">Logout</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<h2 class="Productheading">
+
+Your Products
+</h2>
+
+<div class="getalladmin">
+    <table>
+        <tr>
+            @{
+                foreach (var head in TableHeader)
+                {
+                    <th>
+                        @head
+                    </th>
+                }
+            }
+        </tr>
+        @{
+            if (Model != null)
+            {
+                foreach (var Data in Model)
+                {
+                    <tr>
+                        <td class="idd">@Data.Id</td>
+                        <td class="picture">   <img src="@Url.Content(Data.ImagePath)" height="100vh" width="80%" alt="" /> </td>
+                        <td class="namee">@Data.Name</td>
+                        <td class="description">@Data.Description</td>
+                        <td class="quantity">@Data.Quantity</td>
+                        <td class="edit">@Html.ActionLink("Edit", "UpdateItems", "Card", new { UpId = Data.Id }, null)</td>
+                        <td class="delete">@Html.ActionLink("Delete", "DeleteItems", "Card", new { DelId = Data.Id }, null)</td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>
