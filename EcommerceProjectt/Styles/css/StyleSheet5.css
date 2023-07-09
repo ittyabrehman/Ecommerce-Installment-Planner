@@ -216,3 +216,10 @@
 .logout {
     border: none;
 }
+
+.main {
+    display: flex;
+    height: 110vh;
+    align-items:center;
+    justify-content:center;
+}

@@ -335,7 +335,7 @@ table tr .edit a {
 
 .main {
     display: flex;
-    height: 95vh;
+    height: 110vh;
     align-items:center;
     justify-content:center;
 }
